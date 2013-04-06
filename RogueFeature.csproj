@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Fontend\UCMainGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +77,11 @@
     <Compile Include="Backend\Units\Object.cs" />
     <Compile Include="Backend\Units\PlayerChar.cs" />
     <Compile Include="Backend\Units\Unit.cs" />
+    <Compile Include="DebugLogging\DebugLogger.cs" />
+    <Compile Include="Fontend\UCMainGrid.xaml.cs">
+      <DependentUpon>UCMainGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameHandle.cs" />
     <Compile Include="Loader\XMLLoader.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
