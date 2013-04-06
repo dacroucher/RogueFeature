@@ -11,12 +11,14 @@
 			</object>
 			<imagePath>images\wall1.bmp</imagePath>
 			<direction>0</direction>
+			<passable>False</passable>
 		</point>
 	</map>
 	
 	<object id="box1">
-		<type>Container</type>
+		<type>Unit</type>
 		<imagePath>images\0001.bmp</imagePath>
+		<direction>0</direction>
 		<passable>False</passable>
 		<interactable>True</interactable>
 	</object>
