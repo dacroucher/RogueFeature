@@ -7,10 +7,11 @@ namespace RogueFeature.Backend.Units
 {
     public class Item : BaseObject
     {
-        public Item(int x, int y, int id, Direction face) : base(x,y,id,face,true,false)
+        public Item(int x, int y, String imgPath, Direction face, String name) : base(x,y,imgPath,face,name,true,true)
         {
 
         }
-
+        
+        
     }
 }

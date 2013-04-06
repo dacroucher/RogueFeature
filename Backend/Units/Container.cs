@@ -10,7 +10,7 @@ namespace RogueFeature.Backend.Units
         public bool locked;
         public bool open;
 
-        public Container(int x, int y, String imgPath, Direction face) :base(x,y,imgPath,face, false,true)
+        public Container(int x, int y, String imgPath, Direction face, String name) :base(x,y,imgPath,face, name, false,true)
         {
             locked = false;
             open = false;

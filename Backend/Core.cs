@@ -15,28 +15,32 @@ namespace RogueFeature.Backend
         public event ComputeComplete Computed;
         public static DeltaMap delta = new DeltaMap();               
 
-        public Core(uint Rows, uint Columns)
+        public Core(Map map)
         {
-            _map = new Map(Rows, Columns);
-            
+            _map = map;            
+        }
+
+        public void SetMap(Map map)
+        {
+            _map = map;
         }
         
         public void PlayerMove(Direction d)
         {
             Action(d);
-
             ComputeAI();
             if (Computed != null)
-                Computed(this, new EventArgs());
+                Computed(this, new ComputedEventArgs(delta));
         }
 
 
         private void ComputeAI()
         {
-            
+            foreach (Mobile m in _map.GetSurroundingMobiles(_pc.x, _pc.y, 15))
+            {
+                m.Act(_map,_pc);
+            }
         }
-
-
 
         private void Action(Direction d)
         {

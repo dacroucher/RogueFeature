@@ -7,7 +7,7 @@ namespace RogueFeature.Backend.Units
 {
     public class Corpse : BaseObject
     {
-        public Corpse(int x, int y, String imgPath, Direction face) : base(x,y,imgPath,face,true,false)
+        public Corpse(int x, int y, String imgPath, Direction face, String name) : base(x,y,imgPath,face, name,true,false)
         {
 
         }

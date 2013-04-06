@@ -9,7 +9,7 @@ namespace RogueFeature.Backend.Units
     {
         public bool interactable;
 
-        public BaseObject(int x, int y, String imgPath, Direction face, bool passable, bool interactable) :base(x,y,imgPath, face, passable)
+        public BaseObject(int x, int y, String imgPath, Direction face, String name, bool passable, bool interactable) :base(x,y,imgPath, face, name, passable)
         {
             this.interactable = interactable;
         }
@@ -17,7 +17,7 @@ namespace RogueFeature.Backend.Units
         public virtual void Interact(PlayerChar pc)
         {
             if (!interactable)
-                return;            
+                return;
         }
     }
 }
