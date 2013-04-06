@@ -1,0 +1,15 @@
+C:\RogueFeature\RogueFeature\bin\Debug\RogueFeature.exe
+C:\RogueFeature\RogueFeature\bin\Debug\RogueFeature.pdb
+C:\RogueFeature\RogueFeature\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\RogueFeature\RogueFeature\obj\x86\Debug\MainWindow.baml
+C:\RogueFeature\RogueFeature\obj\x86\Debug\MainWindow.g.cs
+C:\RogueFeature\RogueFeature\obj\x86\Debug\App.g.cs
+C:\RogueFeature\RogueFeature\obj\x86\Debug\RogueFeature_MarkupCompile.cache
+C:\RogueFeature\RogueFeature\obj\x86\Debug\RogueFeature.g.resources
+C:\RogueFeature\RogueFeature\obj\x86\Debug\RogueFeature.Properties.Resources.resources
+C:\RogueFeature\RogueFeature\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\RogueFeature\RogueFeature\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\RogueFeature\RogueFeature\obj\x86\Debug\RogueFeature.exe
+C:\RogueFeature\RogueFeature\obj\x86\Debug\RogueFeature.pdb
+C:\RogueFeature\obj\x86\Debug\RogueFeature.exe
+C:\RogueFeature\obj\x86\Debug\RogueFeature.pdb
