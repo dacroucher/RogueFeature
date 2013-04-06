@@ -63,6 +63,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Backend\Core.cs" />
+    <Compile Include="Backend\Map.cs" />
+    <Compile Include="Backend\ImageLib.cs" />
+    <Compile Include="Backend\Point.cs" />
+    <Compile Include="Backend\Units\Container.cs" />
+    <Compile Include="Backend\Units\Item.cs" />
+    <Compile Include="Backend\Units\Mobile.cs" />
+    <Compile Include="Backend\Units\Object.cs" />
+    <Compile Include="Backend\Units\PlayerChar.cs" />
+    <Compile Include="Backend\Units\Unit.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -92,9 +102,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Backend\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
