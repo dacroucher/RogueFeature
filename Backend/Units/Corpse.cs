@@ -5,12 +5,11 @@ using System.Text;
 
 namespace RogueFeature.Backend.Units
 {
-    public class Item : BaseObject
+    public class Corpse : BaseObject
     {
-        public Item(int x, int y, int id, Direction face) : base(x,y,id,face,true,false)
+        public Corpse(int x, int y, String imgPath, Direction face) : base(x,y,imgPath,face,true,false)
         {
 
         }
-
     }
 }

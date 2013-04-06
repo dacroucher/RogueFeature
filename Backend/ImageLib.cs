@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Backend.Units;
+using RogueFeature.Backend.Units;
 using System.Windows.Media.Imaging;
 
 namespace RogueFeature.Backend

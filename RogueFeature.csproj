@@ -68,13 +68,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Backend\Core.cs" />
+    <Compile Include="Backend\DeltaMap.cs" />
     <Compile Include="Backend\Map.cs" />
     <Compile Include="Backend\ImageLib.cs" />
     <Compile Include="Backend\Point.cs" />
     <Compile Include="Backend\Units\Container.cs" />
+    <Compile Include="Backend\Units\Corpse.cs" />
     <Compile Include="Backend\Units\Item.cs" />
     <Compile Include="Backend\Units\Mobile.cs" />
-    <Compile Include="Backend\Units\Object.cs" />
+    <Compile Include="Backend\Units\BaseObject.cs" />
     <Compile Include="Backend\Units\PlayerChar.cs" />
     <Compile Include="Backend\Units\Unit.cs" />
     <Compile Include="DebugLogging\DebugLogger.cs" />
