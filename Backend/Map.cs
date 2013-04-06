@@ -33,9 +33,9 @@ namespace RogueFeature.Backend
             _columns = columns;            
         }
 
-        public void InitPoint(int x, int y, int imgID, Direction face, bool pass)
+        public void InitPoint(int x, int y, String imagePath, Direction face, bool pass)
         {
-            _points[x][y] = new Point(this, imgID, face, pass);
+            _points[x][y] = new Point(this, imagePath, face, pass);
         }
 
         
