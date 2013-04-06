@@ -6,7 +6,7 @@ using Backend.Units;
 
 namespace Backend
 {
-    public class Grid
+    public class Map
     {
         private int _rows;
         private int _columns;
@@ -27,24 +27,18 @@ namespace Backend
 
         private Point[][] _points;
 
-        public Grid(int rows, int columns)
+        public Map(int rows, int columns)
         {
             _rows = rows;
-            _columns = columns;
-            Init();
+            _columns = columns;            
         }
 
-        private void Init()
+        public void InitPoint(int x, int y, int imgID, Direction face, bool pass)
         {
-            for (int x = 0; x < _rows; x++)
-            {
-                for (int y = 0; y < _columns; y++)
-                {
-                    _points[x][y] = new Point(this);
-                }
-            }
+            _points[x][y] = new Point(this, imgID, face, pass);
         }
 
+        
         public void AddUnitToPoint(int x, int y, Unit u)
         {
             _points[x][y].AddUnit(u);

@@ -4,15 +4,30 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 C:\Users\Braden\Documents\GitHub\RogueFeature\obj\x86\Debug\
+=======
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\
+>>>>>>> ff81006306689fb9602f2003214177b4b62a3c76
 RogueFeature
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 C:\Users\Braden\Documents\GitHub\RogueFeature\App.xaml
 11151548125
 
 6-697541143
+=======
+C:\Users\Rudi\Documents\GitHub\RogueFeature\App.xaml
+11151548125
+
+<<<<<<< HEAD
+16-288923918
+=======
+7-709284630
+>>>>>>> 9cc75496b8e61973ee97ced081bb3d2acd4026b1
+>>>>>>> ff81006306689fb9602f2003214177b4b62a3c76
 12-1381780322
 MainWindow.xaml;
 
