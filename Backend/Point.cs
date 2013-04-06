@@ -10,12 +10,12 @@ namespace RogueFeature.Backend
     {
         private Map _parent;
         private List<Unit> _units;
-        private int _imgID;
+        private String _imgID;
         private Direction _dir;
         private bool _passable;
         public bool passable { get { return _passable; } }
 
-        public Point(Map parent, int imageID, Direction face, bool passable)
+        public Point(Map parent, String imageID, Direction face, bool passable)
         {
             _parent = parent;
             _imgID = imageID;
