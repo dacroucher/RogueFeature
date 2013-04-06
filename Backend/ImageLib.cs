@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace RogueFeature.Backend
 {
-    public static enum Direction { UP, DOWN, LEFT, RIGHT };
+    public enum Direction { UP, DOWN, LEFT, RIGHT };
 
     public static class ImageLib
     {
