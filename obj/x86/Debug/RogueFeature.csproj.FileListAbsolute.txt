@@ -15,3 +15,16 @@ C:\RogueFeature\obj\x86\Debug\RogueFeature.exe
 C:\RogueFeature\obj\x86\Debug\RogueFeature.pdb
 C:\Users\Darren\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.exe
 C:\Users\Darren\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.pdb
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.exe
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.pdb
+C:\Users\Rudi\Documents\GitHub\RogueFeature\bin\Debug\RogueFeature.exe
+C:\Users\Rudi\Documents\GitHub\RogueFeature\bin\Debug\RogueFeature.pdb
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\MainWindow.baml
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\App.g.cs
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\RogueFeature_MarkupCompile.cache
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.g.resources
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.Properties.Resources.resources
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Rudi\Documents\GitHub\RogueFeature\obj\x86\Debug\GenerateResource.write.1.tlog
