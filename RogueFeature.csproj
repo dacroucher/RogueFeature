@@ -73,6 +73,7 @@
     <Compile Include="Backend\Units\Object.cs" />
     <Compile Include="Backend\Units\PlayerChar.cs" />
     <Compile Include="Backend\Units\Unit.cs" />
+    <Compile Include="Loader\XMLLoader.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
