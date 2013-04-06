@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Backend.Units;
+using RogueFeature.Backend.Units;
 
-namespace Backend
+namespace RogueFeature.Backend
 {
     public static enum Direction { UP, DOWN, LEFT, RIGHT };
 

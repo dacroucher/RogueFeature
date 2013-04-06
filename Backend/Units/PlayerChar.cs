@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Backend.Units
+namespace RogueFeature.Backend.Units
 {
     public class PlayerChar : Mobile
     {
-        public PlayerChar(int x, int y, int id, Direction face, int hitsMax)
-            : base(x, y, id, face, hitsMax)
+        
+        public PlayerChar(int x, int y, String imgPath, Direction face, int hitsMax)
+            : base(x, y, imgPath, face, hitsMax)
         {
 
         }

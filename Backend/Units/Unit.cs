@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Backend;
+using RogueFeature.Backend;
 
-namespace Backend.Units
+namespace RogueFeature.Backend.Units
 {
     
     public class Unit
     {
         
-        protected int _x;
-        protected int _y;
-        protected int _imgId;
-        protected Direction _dir;
-        protected bool _passable;
+        public int x;
+        public int y;
+        public String imgPath;
+        public Direction dir;
+        public bool passable;
+        
 
-        public Unit(int x, int y, int imageID, Direction face, bool passable)
+        public Unit(int x, int y, String imagePath, Direction face, bool passable)
         {
-            _x = x;
-            _y = y;
-            _imgId = imageID;
-            _dir = face;
+            this.x = x;
+            this.y = y;
+            this.imgPath = imagePath;
+            this.dir = face;
+            this.passable = passable;
         }
             
     }

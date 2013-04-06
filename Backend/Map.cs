@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Backend.Units;
+using RogueFeature.Backend.Units;
 
-namespace Backend
+namespace RogueFeature.Backend
 {
     public class Map
     {
-        private int _rows;
-        private int _columns;
-        public int rows
+        private uint _rows;
+        private uint _columns;
+        public uint rows
         {
             get
             {
                 return _rows;
             }
         }
-        public int columns
+        public uint columns
         {
             get
             {
@@ -27,7 +27,7 @@ namespace Backend
 
         private Point[][] _points;
 
-        public Map(int rows, int columns)
+        public Map(uint rows, uint columns)
         {
             _rows = rows;
             _columns = columns;            
@@ -42,6 +42,31 @@ namespace Backend
         public void AddUnitToPoint(int x, int y, Unit u)
         {
             _points[x][y].AddUnit(u);
+           
+        }
+
+        public bool Passable(int x, int y)
+        {
+            Point p = _points[x][y];
+            if (p.passable)
+            {
+                Unit[] units = p.UnitList();
+                foreach (Unit u in units)
+                {
+                    if (!u.passable)
+                        return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public Unit[] GetUnits(int x, int y)
+        {
+            return _points[x][y].UnitList();
         }
     }
 }

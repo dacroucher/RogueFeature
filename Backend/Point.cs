@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Backend.Units;
+using RogueFeature.Backend.Units;
 
-namespace Backend
+namespace RogueFeature.Backend
 {
     public class Point
     {
@@ -13,6 +13,7 @@ namespace Backend
         private int _imgID;
         private Direction _dir;
         private bool _passable;
+        public bool passable { get { return _passable; } }
 
         public Point(Map parent, int imageID, Direction face, bool passable)
         {
@@ -34,6 +35,11 @@ namespace Backend
             if (!_units.Contains(u))
                 return;
             _units.Remove(u);
+        }
+
+        public Unit[] UnitList()
+        {
+            return _units.ToArray();
         }
 
     }
