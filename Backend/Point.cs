@@ -8,12 +8,18 @@ namespace Backend
 {
     public class Point
     {
-        private Grid _parent;
+        private Map _parent;
         private List<Unit> _units;
+        private int _imgID;
+        private Direction _dir;
+        private bool _passable;
 
-        public Point(Grid parent)
+        public Point(Map parent, int imageID, Direction face, bool passable)
         {
             _parent = parent;
+            _imgID = imageID;
+            _dir = face;
+            _passable = passable;
         }
 
         public void AddUnit(Unit u)
