@@ -15,3 +15,5 @@ C:\RogueFeature\obj\x86\Debug\RogueFeature.exe
 C:\RogueFeature\obj\x86\Debug\RogueFeature.pdb
 C:\Users\Darren\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.exe
 C:\Users\Darren\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.pdb
+C:\Users\Braden\Documents\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.exe
+C:\Users\Braden\Documents\GitHub\RogueFeature\obj\x86\Debug\RogueFeature.pdb
