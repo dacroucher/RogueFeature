@@ -4,21 +4,21 @@
 		<rows>1</rows>
 		<columns>1</columns>
 		<point>
-			<xposition>1</xposition>
-			<yposition>1</yposition>
+			<xposition>0</xposition>
+			<yposition>0</yposition>
 			<object id="box1">
 					<orientation>0</orientation>
 			</object>
-			<imagePath>wall1.bmp</imagePath>
-			<direction>0<direction
+			<imagePath>images\wall1.bmp</imagePath>
+			<direction>0</direction>
 		</point>
 	</map>
 	
 	<object id="box1">
 		<type>Container</type>
-		<imageID>0001</imageID>
 		<imagePath>images\0001.bmp</imagePath>
 		<passable>False</passable>
 		<interactable>True</interactable>
 	</object>
+
 </RogueFeature>

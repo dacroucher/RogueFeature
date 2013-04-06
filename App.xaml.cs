@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using Loader;
 
 namespace RogueFeature
 {
@@ -12,5 +13,6 @@ namespace RogueFeature
     /// </summary>
     public partial class App : Application
     {
+        XMLLoader load = new XMLLoader("Loader/map.xml", "lvl1");
     }
 }

@@ -6,7 +6,7 @@ using Backend.Units;
 
 namespace Backend
 {
-    public static enum Direction { UP, DOWN, LEFT, RIGHT };
+    public enum Direction { UP, DOWN, LEFT, RIGHT };
 
     public class ImageLib
     {                                

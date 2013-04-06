@@ -4,68 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using Backend;
 
 namespace Loader
 {
     public class XMLLoader
     {
         private string _XMLFileName;
-        public XMLLoader(String XMLFileName, bool LoadYesNo)
+        private string _levelID;
+        private List<Map> _map;
+        List<XElement> _Level;
+
+        public XMLLoader(String XMLFileName, String levelID)
         {
             _XMLFileName = XMLFileName;
-            if (LoadYesNo)
-                XMLLoad();
-        }
-
-        public XMLLoader()
-        {
-        }
-
-        public bool setFileName(String XMLFileName, bool LoadYesNo)
-        {
-            _XMLFileName = XMLFileName;
-            if (LoadYesNo)
+            _levelID = levelID;
+            try
             {
-                try{
-                    XMLLoad();
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine("XML Import error: " + exception.ToString());
-                    return false;
-                }
-            }
-            return true;
-
-        }
-        
-        public bool loadXMLFile()
-        {
-            try{
-                    XMLLoad();
+                XMLLoad();
             }
             catch (Exception exception)
             {
                 Console.WriteLine("XML Import error: " + exception.ToString());
-                return false;
             }
-            return true;
         }
 
         private void XMLLoad()
         {
             XDocument doc = new XDocument();
             doc = XDocument.Load(_XMLFileName);
-            List <String> Contact = (from xml2 in doc.Descendants("author")
-                                select xml2.Value).Distinct().ToList();
-            foreach (String element in Contact)
+            int rows, columns;
+
+            foreach (XElement map in doc.Descendants("map"))
             {
-                Console.WriteLine(element);
+                rows = Convert.ToInt32(map.Descendants("rows").FirstOrDefault().Value);
+                columns = Convert.ToInt32(map.Descendants("columns").FirstOrDefault().Value);
+                _map.Add(new Map(rows, columns));
+                foreach (XElement point in map.Descendants("point").ToList())
+                {
+                    Console.WriteLine("X: " + point.Descendants("xposition").FirstOrDefault().Value);
+                    Console.WriteLine("Y: " + point.Descendants("yposition").FirstOrDefault().Value);
+                }
             }
 
-                
         }
 
- 
+
     }
 }
