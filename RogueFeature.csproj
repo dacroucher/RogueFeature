@@ -67,6 +67,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Backend\ComputedEventArgs.cs" />
     <Compile Include="Backend\Core.cs" />
     <Compile Include="Backend\DeltaMap.cs" />
     <Compile Include="Backend\Map.cs" />

@@ -68,5 +68,55 @@ namespace RogueFeature.Backend
         {
             return _points[x][y].UnitList();
         }
+
+        public Mobile[] GetSurroundingMobiles(int baseX, int baseY, int range)
+        {
+            List<Unit> units = new List<Unit>();
+            List<Mobile> mobs = new List<Mobile>();
+
+            for (int i = 3; i < range; i++)
+            {
+                BoxSearch(baseX - (i / 2), baseY - (i / 2), i);
+            }
+
+            foreach (Unit u in units)
+            {
+                if (u is Mobile)
+                {
+                    mobs.Add((Mobile)u);
+                }
+            }
+            return mobs.ToArray();
+        }
+
+        private List<Unit> BoxSearch(int originX, int originY, int length)
+        {
+            List<Unit> units = new List<Unit>();
+            
+            for (int i = 0; i < length; i++ )
+            {
+                units.AddRange(GetUnits(i, originY));
+            }
+
+            for (int j = 1; j < length; j++)
+            {
+                units.AddRange(GetUnits(originX+1, j));
+            }
+
+            for (int i = 1; i < length; i++)
+            {
+                units.AddRange(GetUnits(originX +1 , originY + length-1));
+            }
+
+            for (int j = 1; j < length-1; j++)
+            {
+                units.AddRange(GetUnits(originX + length - 1, originY + j));
+            }
+
+            return units;
+        }
+
+        
+
     }
 }

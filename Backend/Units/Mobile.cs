@@ -12,10 +12,12 @@ namespace RogueFeature.Backend.Units
         public int atk;
         public int def;
         
-        public Mobile(int x, int y, String imgPath, Direction face, int hitsMax) :base(x,y,imgPath,face, false)
+        public Mobile(int x, int y, String imgPath, Direction face, String name, int hitsMax, int attack, int defense) :base(x,y,imgPath,face, name, false)
         {
             this.hitsMax = hitsMax;
-            hits = hitsMax;            
+            hits = hitsMax;
+            atk = attack;
+            def = defense;
         }
 
         public virtual void TakeHit(Mobile m)

@@ -15,9 +15,9 @@ namespace RogueFeature.Backend.Units
         public String imgPath;
         public Direction dir;
         public bool passable;
-        
+        public String name;
 
-        public Unit(int x, int y, String imagePath, Direction face, bool passable)
+        public Unit(int x, int y, String imagePath, Direction face, String name, bool passable)
         {
             this.x = x;
             this.y = y;
