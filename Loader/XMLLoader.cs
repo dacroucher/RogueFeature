@@ -13,7 +13,7 @@ namespace Loader
         // Path to XML data file.
         private string _XMLFileName;
         // Data structure where XML data is stored.
-        private List<Map> _map;
+        private List<Map> _map = new List<Map>();
 
         /// <summary>
         /// Constructor. Loads from map.xml into a list of map objects.
