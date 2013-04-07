@@ -6,21 +6,69 @@
 		<point>
 			<xposition>0</xposition>
 			<yposition>0</yposition>
-			<object id="box1">
-					<orientation>0</orientation>
-			</object>
 			<imagePath>images\wall1.bmp</imagePath>
 			<direction>0</direction>
 			<passable>False</passable>
-		</point>
+			<object id="unit1" />
+			</point>
 	</map>
 	
-	<object id="box1">
+	<object id="unit1">
 		<type>Unit</type>
+		<name>Bramur</name>
 		<imagePath>images\0001.bmp</imagePath>
 		<direction>0</direction>
 		<passable>False</passable>
-		<interactable>True</interactable>
+	</object>
+	
+	<object id="baseobject1">
+		<type>BaseObject</type>
+		<name>Bramur</name>
+		<imagePath>images\0001.bmp</imagePath>
+		<direction>0</direction>
+		<passable>False</passable>
+		<interactable>False</interactable>
+	</object>
+	
+	<object id="mobile1">
+		<type>Mobile</type>
+		<name>Bramur</name>
+		<imagePath>images\0001.bmp</imagePath>
+		<direction>0</direction>
+		<hitsMax>10</hitsMax>
+		<attack>3</attack>
+		<defense>2</defense>
+	</object>
+	
+	<object id="playerchar1">
+		<type>PlayerChar</type>
+		<name>Bramur</name>
+		<imagePath>images\0001.bmp</imagePath>
+		<direction>0</direction>
+		<hitsMax>10</hitsMax>
+		<attack>3</attack>
+		<defense>2</defense>
+	</object>
+	
+	<object id="container1">
+		<type>Container</type>
+		<name>Bramur</name>
+		<imagePath>images\0001.bmp</imagePath>
+		<direction>0</direction>
+	</object>
+	
+	<object id="item1">
+		<type>Item</type>
+		<name>Bramur</name>
+		<imagePath>images\0001.bmp</imagePath>
+		<direction>0</direction>
+	</object>
+	
+	<object id="corpse1">
+		<type>Corpse</type>
+		<name>Bramur</name>
+		<imagePath>images\0001.bmp</imagePath>
+		<direction>0</direction>
 	</object>
 
 </RogueFeature>
