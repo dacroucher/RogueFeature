@@ -22,11 +22,15 @@ namespace RogueFeature.Backend
     
     public class DeltaMap
     {
-        private List<DeltaUnitPair> _deltaList;
-
+        private List<DeltaUnitPair> _deltaList;        
+        
+        private DeltaMap(List<DeltaUnitPair> toClone)
+        {
+            _deltaList = new List<DeltaUnitPair>(toClone);
+        }
 
         public DeltaMap()
-        {
+        {            
             _deltaList = new List<DeltaUnitPair>();
         }
 
@@ -50,6 +54,16 @@ namespace RogueFeature.Backend
             DeltaUnitPair[] arr = _deltaList.ToArray();
             _deltaList.Clear();
             return arr;
+        }
+
+        public DeltaMap Clone()
+        {
+            return new DeltaMap(_deltaList);
+        }
+
+        public void Clear()
+        {
+            _deltaList.Clear();            
         }
     }
 

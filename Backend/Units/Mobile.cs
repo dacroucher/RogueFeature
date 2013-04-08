@@ -29,7 +29,8 @@ namespace RogueFeature.Backend.Units
 
         protected virtual void Die()
         {
-            Core.delta.DeltaRemove(this);            
+            Core.delta.DeltaRemove(this);
+            _point.RemoveUnit(this);
         }
 
         public virtual void Act(Map m, PlayerChar pc)
@@ -44,6 +45,8 @@ namespace RogueFeature.Backend.Units
             }
         }
 
+
+        #region Pathfinding
         protected bool Pathfind(int tarX, int tarY, Map m)
         {
             int diffX = tarX - x;
@@ -55,72 +58,41 @@ namespace RogueFeature.Backend.Units
             }
             else
             {
-                if (Math.Abs(diffX) > Math.Abs(diffY)) //try x first
+                if (Math.Abs(diffX) >= Math.Abs(diffY)) //try x first
                 {
-                    if (diffX < 0) 
+                    if (AttemptX(diffX, m))
                     {
-                        if (m.Passable(x-1, y))
-                        {
-                            x--;
-                            Core.delta.DeltaEdit(this);
-                        }
-                        else
-                        {
-                            AttemptY(diffY, m); // try y second
-                        }
+
                     }
                     else
                     {
-                        if (m.Passable(x+1, y))
-                        {
-                            x++;
-                            Core.delta.DeltaEdit(this);
-                        }
-                        else
-                        {
-                            AttemptY(diffY, m);// try y second
-                        }
+                        AttemptY(diffY, m);
                     }
                 }
                 else //try y first
                 {
-                    if (diffY < 0)
+                    if(AttemptY(diffY, m))
                     {
-                        if (m.Passable(y - 1, y))
-                        {
-                            y--;
-                            Core.delta.DeltaEdit(this);
-                        }
-                        else
-                        {
-                            AttemptX(diffX, m); //try x second
-                        }
+
                     }
                     else
                     {
-                        if (m.Passable(x + 1, y))
-                        {
-                            y++;
-                            Core.delta.DeltaEdit(this);
-                        }
-                        else
-                        {
-                            AttemptX(diffX, m); //try x second
-                        }
+                        AttemptX(diffX, m);
                     }
                 }
             }
             return false;
         }
 
-        private void AttemptX(int diffX, Map m)
+        private bool AttemptX(int diffX, Map m)
         {
             if (diffX < 0)
             {
                 if (m.Passable(x - 1, y))
-                {
-                    x--;
-                    Core.delta.DeltaEdit(this);
+                {                    
+                    x--;                    
+                    _point.Migrate(this, x, y);
+                    return true;                    
                 }
             }
             else
@@ -128,19 +100,22 @@ namespace RogueFeature.Backend.Units
                 if (m.Passable(x + 1, y))
                 {
                     x++;
-                    Core.delta.DeltaEdit(this);
+                    _point.Migrate(this, x, y);
+                    return true;
                 }
             }
+            return false;
         }
 
-        private void AttemptY(int diffY, Map m)
+        private bool AttemptY(int diffY, Map m)
         {
             if (diffY < 0)
             {
                 if (m.Passable(y - 1, y))
                 {
                     y--;
-                    Core.delta.DeltaEdit(this);
+                    _point.Migrate(this, x, y);
+                    return true;
                 }
             }
             else
@@ -148,15 +123,18 @@ namespace RogueFeature.Backend.Units
                 if (m.Passable(x + 1, y))
                 {
                     y++;
-                    Core.delta.DeltaEdit(this);
+                    _point.Migrate(this, x, y);
+                    return true;
                 }
             }
+            return false;
         }
-        
-        
+        #endregion
 
 
 
-                
+
+
+
     }
 }

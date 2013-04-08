@@ -8,9 +8,9 @@ namespace RogueFeature.Backend
     class ComputedEventArgs : EventArgs
     {
 
-        DeltaMap deltaMap;
+        DeltaUnitPair [] deltaMap;
 
-        public ComputedEventArgs(DeltaMap dm)
+        public ComputedEventArgs(DeltaUnitPair [] dm)
             : base()
         {
             deltaMap = dm;

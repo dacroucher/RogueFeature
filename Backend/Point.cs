@@ -42,5 +42,12 @@ namespace RogueFeature.Backend
             return _units.ToArray();
         }
 
+        public void Migrate(Unit u, int x, int y)
+        {
+            RemoveUnit(u);
+            _parent.AddUnitToPoint(x, y, u);
+            Core.delta.DeltaEdit(u);
+        }
+
     }
 }

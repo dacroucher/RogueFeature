@@ -13,5 +13,12 @@ namespace RogueFeature.Backend.Units
         {
 
         }
+
+        public void Move(int newX, int newY)
+        {
+            x = newX;
+            y = newY;
+            _point.Migrate(this, x, y);
+        }
     }
 }

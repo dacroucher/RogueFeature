@@ -75,6 +75,7 @@
     <Compile Include="Backend\Point.cs" />
     <Compile Include="Backend\Units\Container.cs" />
     <Compile Include="Backend\Units\Corpse.cs" />
+    <Compile Include="Backend\Units\HealthPack.cs" />
     <Compile Include="Backend\Units\Item.cs" />
     <Compile Include="Backend\Units\Mobile.cs" />
     <Compile Include="Backend\Units\BaseObject.cs" />

@@ -33,20 +33,40 @@ namespace RogueFeature.Backend
             _columns = columns;            
         }
 
+        //Initialise a point in the map
         public void InitPoint(int x, int y, String imagePath, Direction face, bool pass)
-        {
-            _points[x][y] = new Point(this, imagePath, face, pass);
+        {                                        
+                try
+                {
+                    _points[x][y] = new Point(this, imagePath, face, pass);
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new IndexOutOfRangeException("Attempted to intialise a point outside the bounds of map");
+                }
         }
-
         
+        //Add a unit to a point in the map
         public void AddUnitToPoint(int x, int y, Unit u)
         {
-            _points[x][y].AddUnit(u);
-           
+            try
+            {
+                if (_points[x][y] == null)
+                    throw new NullReferenceException("Point " + x + ";" + y + " is not initialised");
+                _points[x][y].AddUnit(u);
+                u.SetPoint(_points[x][y]);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new IndexOutOfRangeException("Attempted to add unit to a point outside the bounds of map");
+            }            
         }
-
+        
+        //Check if a point is passable
         public bool Passable(int x, int y)
         {
+            if (BoundCheck(x, y))
+                return false;
             Point p = _points[x][y];
             if (p.passable)
             {
@@ -64,19 +84,29 @@ namespace RogueFeature.Backend
             return true;
         }
 
+        //Get a list of units from a point
         public Unit[] GetUnits(int x, int y)
-        {
-            return _points[x][y].UnitList();
+        {            
+            try
+            {
+                return _points[x][y].UnitList();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new Exception("Attempted to retrieve a unit list from a point outside bounds of map.");
+            }
         }
 
-        public Mobile[] GetSurroundingMobiles(int baseX, int baseY, int range)
+        #region RangeCheck
+        //Perform a sequence of box searches surrounding origin x;y up to a range to find all mobiles
+        public Mobile[] GetMobilesInRange(int originX, int originY, int range)
         {
             List<Unit> units = new List<Unit>();
             List<Mobile> mobs = new List<Mobile>();
 
-            for (int i = 3; i < range; i++)
+            for (int i = 1; i < range; i++)
             {
-                BoxSearch(baseX - (i / 2), baseY - (i / 2), i);
+                TileBoxSearch(originX - i, originY - i, (i*2) + 1);
             }
 
             foreach (Unit u in units)
@@ -88,35 +118,56 @@ namespace RogueFeature.Backend
             }
             return mobs.ToArray();
         }
-
-        private List<Unit> BoxSearch(int originX, int originY, int length)
+        private List<Unit> TileBoxSearch(int xTopLeft, int yTopLeft, int sideLength)
         {
             List<Unit> units = new List<Unit>();
             
-            for (int i = 0; i < length; i++ )
+            //top bar R2L
+            for (int i = 0; i < sideLength; i++ )
             {
-                units.AddRange(GetUnits(i, originY));
+                if(BoundCheck(xTopLeft + i, yTopLeft))
+                    units.AddRange(GetUnits(xTopLeft + i, yTopLeft));
             }
 
-            for (int j = 1; j < length; j++)
+            //right bar T2B
+            for (int j = 1; j < sideLength; j++)
             {
-                units.AddRange(GetUnits(originX+1, j));
+                if(BoundCheck(xTopLeft + sideLength - 1, yTopLeft + j))
+                    units.AddRange(GetUnits(xTopLeft + sideLength - 1, yTopLeft + j));
+            }
+            
+            //left bar T2B
+            for (int j = 1; j < sideLength; j++)
+            {
+                if(BoundCheck(xTopLeft, yTopLeft + j))
+                    units.AddRange(GetUnits(xTopLeft, yTopLeft + j));
             }
 
-            for (int i = 1; i < length; i++)
+            //bottom bar R2L
+            for (int i = 1; i < sideLength - 1; i++)
             {
-                units.AddRange(GetUnits(originX +1 , originY + length-1));
-            }
-
-            for (int j = 1; j < length-1; j++)
-            {
-                units.AddRange(GetUnits(originX + length - 1, originY + j));
+                if (BoundCheck(xTopLeft + i, yTopLeft + sideLength - 1)) 
+                    units.AddRange(GetUnits(xTopLeft + i, yTopLeft + sideLength - 1));
             }
 
             return units;
         }
+        #endregion
 
-        
+        //Check if a point x;y is within the column/row bounds of map
+        public bool BoundCheck(int x, int y)
+        {
+            if (x > _columns || x < 0)
+            {
+                return false;
+            }
+            if (y > _rows || y < 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
 
     }
 }

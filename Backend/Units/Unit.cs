@@ -16,6 +16,7 @@ namespace RogueFeature.Backend.Units
         public Direction dir;
         public bool passable;
         public String name;
+        protected Point _point;
 
         public Unit(int x, int y, String imagePath, Direction face, String name, bool passable)
         {
@@ -24,6 +25,11 @@ namespace RogueFeature.Backend.Units
             this.imgPath = imagePath;
             this.dir = face;
             this.passable = passable;
+        }
+
+        public virtual void SetPoint(Point p)
+        {
+            _point = p;
         }
             
     }
