@@ -6,7 +6,7 @@ using RogueFeature.Backend.Units;
 
 namespace RogueFeature.Backend
 {
-    public static enum Delta {ADD, REMOVE, EDIT};
+    public enum Delta {ADD, REMOVE, EDIT};
 
     public struct DeltaUnitPair
     {
