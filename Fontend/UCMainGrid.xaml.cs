@@ -12,7 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Loader;
-using Backend;
+using RogueFeature.Backend;
+using RogueFeature.Backend.Units;
 
 namespace RogueFeature.Fontend
 {
@@ -23,18 +24,10 @@ namespace RogueFeature.Fontend
     {
         private Image imgUser;
         private const uint BlockSize = 52;
-
-        public UCMainGrid(Map map)
+        public Core currentCore { private set; get; }
+        public UCMainGrid()
         {
             InitializeComponent();
-            this.CreateGrid(map.rows, map.columns);
-            /*
-             foreach(Grid grid in loader.lstGrids)
-             {
-             * this.CreateGrid(grid.rowSize, grid.colSize, grid.Objects);
-             * 
-             }*/
-            //
         }
 
         private void SetupImages()
@@ -43,15 +36,59 @@ namespace RogueFeature.Fontend
             imgUser.Source = null;
         }
 
-        private void 
+        public void SetupUIMainGrid(Core core)
+        {
+            this.currentCore = core;
+            this.CreateGrid(core.Map.rows, core.Map.columns);
+            int xSize = core.Map.Points.GetUpperBound(0);
+	        int ySize = core.Map.Points.GetUpperBound(1);
+            for(int x = 0; x < xSize; ++x)
+            {
+                for(int y = 0; y < ySize; ++y)
+                {
+                    if (core.Map.Points[x, y] != null)
+                    {
+                        Image m = new Image();
+                        m.Tag = core.Map.Points[x, y];
+                        m.Source = ImageLib.GrabImage(core.Map.Points[x, y].ImgID);
+       
+                        m.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                        m.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                        gridMain.Children.Add(m);
+                        Grid.SetColumn(m, y);
+                        Grid.SetRow(m, x);
+
+                        StackPanel s = new StackPanel();
+                        s.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                        s.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                        s.Background = Brushes.Red;
+                        Grid.SetColumn(s, y);
+                        Grid.SetRow(s, x);
+                      //  gridMain.Children.Add(s);
+                        //Canvas.SetZIndex(m, 1);
+
+                        foreach (Unit u in core.Map.Points[x, y].Units)
+                        {
+                            Image m2 = new Image();
+                            m2.Tag = core.Map.Points[x, y];
+                            m2.Source = ImageLib.GrabImage(u.imgPath);
+                            Grid.SetColumn(m2, y);
+                            Grid.SetRow(m2, x);
+                            gridMain.Children.Add(m2);
+                            Canvas.SetZIndex(m2, 1);
+                        }
+                    }
+                }
+            }
+        }
 
         private void CreateGrid(uint rowSize, uint colSize)
         {
-           /* img = new StackPanel();
-            img.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-            img.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-            img.Background = Brushes.Red;
-            gridMain.Children.Add(img);*/
+            gridMain.Background = Brushes.Pink;
+            gridMain.RowDefinitions.Clear();
+            gridMain.ColumnDefinitions.Clear();
+            gridMain.Width = BlockSize * colSize;
+            gridMain.Height = BlockSize * rowSize;
             for (int i = 0; i < rowSize; ++i)
             {
                 RowDefinition row = new RowDefinition();
@@ -67,35 +104,29 @@ namespace RogueFeature.Fontend
             }
         }
 
-        private void gridMain_KeyDown(object sender, KeyEventArgs e)
+        public void KeyDown(object sender, KeyEventArgs e)
         {
+            if (this.currentCore == null) return;
+
             switch (e.Key)
             {
                 case Key.Down:
-                    tempY++;
+                case Key.S:
+                    this.currentCore.PlayerMove(Direction.DOWN);
                     break;
                 case Key.Up:
-                    tempY--;
+                case Key.W:
+                    this.currentCore.PlayerMove(Direction.UP);
                     break;
+                case Key.D:
                 case Key.Right:
-                    tempX++;
+                    this.currentCore.PlayerMove(Direction.RIGHT);
                     break;
                 case Key.Left:
-                    tempX--;
+                case Key.A:
+                    this.currentCore.PlayerMove(Direction.LEFT);
                     break;
             }
-
-            if (tempX < g.RowDefinitions.Count && tempX >= 0)
-            {
-                x = tempX;
-            }
-
-            if (tempY < g.ColumnDefinitions.Count && tempY >= 0)
-            {
-                y = tempY;
-            }
-            Grid.SetColumn(this.img, x);
-            Grid.SetRow(this.img, y);
         }
     }
 }

@@ -1,74 +1,74 @@
 <?xml version="1.0"?>
 <RogueFeature>
-	<map id="lvl1">
-		<rows>1</rows>
-		<columns>1</columns>
-		<point>
-			<xposition>0</xposition>
-			<yposition>0</yposition>
-			<imagePath>images\wall1.bmp</imagePath>
-			<direction>0</direction>
-			<passable>False</passable>
-			<object id="unit1" />
-			</point>
-	</map>
-	
-	<object id="unit1">
-		<type>Unit</type>
-		<name>Bramur</name>
-		<imagePath>images\0001.bmp</imagePath>
-		<direction>0</direction>
-		<passable>False</passable>
-	</object>
-	
-	<object id="baseobject1">
-		<type>BaseObject</type>
-		<name>Bramur</name>
-		<imagePath>images\0001.bmp</imagePath>
-		<direction>0</direction>
-		<passable>False</passable>
-		<interactable>False</interactable>
-	</object>
-	
-	<object id="mobile1">
-		<type>Mobile</type>
-		<name>Bramur</name>
-		<imagePath>images\0001.bmp</imagePath>
-		<direction>0</direction>
-		<hitsMax>10</hitsMax>
-		<attack>3</attack>
-		<defense>2</defense>
-	</object>
-	
-	<object id="playerchar1">
-		<type>PlayerChar</type>
-		<name>Bramur</name>
-		<imagePath>images\0001.bmp</imagePath>
-		<direction>0</direction>
-		<hitsMax>10</hitsMax>
-		<attack>3</attack>
-		<defense>2</defense>
-	</object>
-	
-	<object id="container1">
-		<type>Container</type>
-		<name>Bramur</name>
-		<imagePath>images\0001.bmp</imagePath>
-		<direction>0</direction>
-	</object>
-	
-	<object id="item1">
-		<type>Item</type>
-		<name>Bramur</name>
-		<imagePath>images\0001.bmp</imagePath>
-		<direction>0</direction>
-	</object>
-	
-	<object id="corpse1">
-		<type>Corpse</type>
-		<name>Bramur</name>
-		<imagePath>images\0001.bmp</imagePath>
-		<direction>0</direction>
-	</object>
+  <map>
+    <rows>10</rows>
+    <columns>10</columns>
+    <name>level 1</name>
+    <point>
+      <xposition>0</xposition>
+      <yposition>0</yposition>
+      <imagePath>Images\wall1.png</imagePath>
+      <direction>0</direction>
+      <passable>False</passable>
+      <object id="unit" />
+    </point>
+    <point>
+      <xposition>0</xposition>
+      <yposition>1</yposition>
+      <imagePath>Images\wall1.png</imagePath>
+      <direction>0</direction>
+      <passable>False</passable>
+      <object id="unit" />
+    </point>
+    <point>
+      <xposition>0</xposition>
+      <yposition>2</yposition>
+      <imagePath>Images\floor1.png</imagePath>
+      <direction>0</direction>
+      <passable>True</passable>
+      <object id="playerchar" />
+    </point>
+  </map>
+  
+  <objects>
+    <object id="unit">
+      <imagePath>images\0001.bmp</imagePath>
+      <passable>False</passable>
+      <interactable>False</interactable>
+    </object>
 
+    <object id="baseobject">
+      <imagePath>images\0001.bmp</imagePath>
+      <passable>False</passable>
+      <interactable>False</interactable>
+    </object>
+
+    <object id="mobile">
+      <imagePath>images\0001.bmp</imagePath>
+      <passable>False</passable>
+      <interactable>False</interactable>
+      <hitsMax>10</hitsMax>
+      <attack>3</attack>
+      <defense>2</defense>
+    </object>
+
+    <object id="playerchar">
+      <imagePath>images\player.png</imagePath>
+      <hitsMax>10</hitsMax>
+      <attack>3</attack>
+      <defense>2</defense>
+    </object>
+
+    <object id="container">
+      <imagePath>images\0001.bmp</imagePath>
+    </object>
+
+    <object id="item">
+      <imagePath>images\0001.bmp</imagePath>
+    </object>
+
+    <object id="corpse">
+      <imagePath>images\0001.bmp</imagePath>
+    </object>
+  </objects>
 </RogueFeature>

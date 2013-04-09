@@ -9,8 +9,10 @@ namespace RogueFeature.Backend
     public class Point
     {
         private Map _parent;
+        public List<Unit> Units { get { return _units; } }
         private List<Unit> _units;
-        private String _imgID;
+        private string _imgID;
+        public string ImgID { get { return _imgID; } }
         private Direction _dir;
         private bool _passable;
         public bool passable { get { return _passable; } }
@@ -18,6 +20,7 @@ namespace RogueFeature.Backend
         public Point(Map parent, String imageID, Direction face, bool passable)
         {
             _parent = parent;
+            _units = new List<Unit>();
             _imgID = imageID;
             _dir = face;
             _passable = passable;

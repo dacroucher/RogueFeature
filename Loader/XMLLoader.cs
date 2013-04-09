@@ -5,16 +5,27 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using RogueFeature.Backend;
+using RogueFeature.DebugLogging;
 
 namespace Loader
 {
     public class XMLLoader
     {
+        public class UnitObject
+        {
+            public string ID { set; get; }
+            public string Name { set; get; }
+            public bool IsPassable { set; get; }
+            public string ImagePath { set; get; }
+            public Direction Direction { set; get; }
+            public bool IsInteractable { set; get; }
+        }
+
         // Path to XML data file.
-        private string _XMLFileName;
+        private const string XMLFileName = "Loader//map.xml";
         // Data structure where XML data is stored.
         private List<Map> _map = new List<Map>();
-
+        public List<Map> lstMaps { get { return _map; } } 
         /// <summary>
         /// Constructor. Loads from map.xml into a list of map objects.
         /// </summary>
@@ -23,14 +34,13 @@ namespace Loader
         /// </remarks>
         public XMLLoader()
         {
-            _XMLFileName = "map.xml";
             try
             {
                 XMLLoad();
             }
             catch (Exception exception)
             {
-                Console.WriteLine("XML Import error: " + exception.ToString());
+                DebugLogger.LogIt("$E XML Import error: " + exception.ToString());
             }
         }
 
@@ -49,25 +59,20 @@ namespace Loader
         /// <remarks>
         /// This is a private function used internally.
         /// </remarks>
-        private Direction intToDirection(int dir)
+        private static Direction intToDirection(int dir)
         {
             switch (dir)  //convert number in xml to direction enum
             {
                 case 0:
                     return Direction.UP;
-                    break;
                 case 1:
                     return Direction.RIGHT;
-                    break;
                 case 2:
                     return Direction.DOWN;
-                    break;
                 case 3:
                     return Direction.LEFT;
-                    break;
                 default:
                     return Direction.UP;
-                    break;
             }
         }
 
@@ -92,15 +97,52 @@ namespace Loader
         private void XMLLoad()
         {
             XDocument doc = new XDocument();
-            doc = XDocument.Load(_XMLFileName);
-            uint rows, columns;
+            doc = XDocument.Load(XMLLoader.XMLFileName);
+            uint mapID = 0;
+
+            List<XElement> lstObjects = doc.Descendants("objects").ToList();
+
+            List<UnitObject> lstUnitObjects = new List<UnitObject>();
+            XElement objParent = doc.Descendants("objects").FirstOrDefault();
+            foreach (XElement obj in objParent.Descendants("object"))
+            {
+                UnitObject unitObj = new UnitObject();
+                unitObj.ID = obj.Attribute("id").Value;
+                unitObj.ImagePath = obj.Descendants("imagePath").FirstOrDefault().Value;
+                if (obj.Descendants("passable").FirstOrDefault() != null)
+                {
+                    unitObj.IsPassable = Convert.ToBoolean(obj.Descendants("passable").FirstOrDefault().Value);
+                }
+                else unitObj.IsPassable = false;
+
+                if (obj.Descendants("direction").FirstOrDefault() != null)
+                {
+                    unitObj.Direction = intToDirection(Convert.ToInt32(obj.Descendants("direction").FirstOrDefault().Value));
+                }
+                else unitObj.Direction = intToDirection(0);
+
+                if (obj.Descendants("interactable").FirstOrDefault() != null)
+                {
+                    unitObj.IsInteractable = Convert.ToBoolean(obj.Descendants("interactable").FirstOrDefault().Value);
+                }
+                else unitObj.IsInteractable = false;
+
+                if (obj.Descendants("name").FirstOrDefault() != null)
+                {
+                    unitObj.Name = obj.Descendants("name").FirstOrDefault().Value;
+                }
+                else unitObj.Name = "";
+
+                lstUnitObjects.Add(unitObj);
+            }
 
             // GET: Each level in the game.
             foreach (XElement map in doc.Descendants("map"))    
             {
-                rows = Convert.ToUInt32(map.Descendants("rows").FirstOrDefault().Value);
-                columns = Convert.ToUInt32(map.Descendants("columns").FirstOrDefault().Value);
-                _map.Add(new Map(rows, columns));    
+                uint rows = Convert.ToUInt32(map.Descendants("rows").FirstOrDefault().Value);
+                uint columns = Convert.ToUInt32(map.Descendants("columns").FirstOrDefault().Value);    
+                string mapName = map.Descendants("name").FirstOrDefault().Value;
+                _map.Add(new Map(rows, columns, mapID++, mapName));
                 // Reference to the last added map.
                 Map latestMap = _map[_map.Count - 1];  
                 // GET: Each point in the map.
@@ -108,94 +150,26 @@ namespace Loader
                 {
                     int xPosition = Convert.ToInt32(point.Descendants("xposition").FirstOrDefault().Value);
                     int yPosition = Convert.ToInt32(point.Descendants("yposition").FirstOrDefault().Value);
-                    string imagePath = point.Descendants("imagePath").FirstOrDefault().Value;
                     int direction = Convert.ToInt32(point.Descendants("direction").FirstOrDefault().Value);
+                    string imagePath = point.Descendants("imagePath").FirstOrDefault().Value;
                     bool passable = Convert.ToBoolean(point.Descendants("passable").FirstOrDefault().Value);
+
                     // Initialize point.
                     latestMap.InitPoint(xPosition, yPosition, imagePath, intToDirection(direction), passable);  
-                    // GET: All units at the point.
-                    foreach (XElement unit in point.Descendants("object").ToList())   
+
+                    foreach(XElement child in point.Descendants("object").ToList())
                     {
-                        string unitid = unit.Attribute("id").Value;
-                        XElement theunit = (from el in doc.Elements("object")
-                         where (string)el.Attribute("id") == unitid
-                         select el).FirstOrDefault();
-                        string type = theunit.Descendants("type").FirstOrDefault().Value;
-                        // Variables for the switch case.
-                        String name, imgPath;
-                        bool pass, inter;
-                        int dir, hitsMax, attack, defense;
-                        // Determine type of unit and add to the point.
-                        switch (type)
+                        foreach (UnitObject obj in lstUnitObjects)
                         {
-                            case "Unit":
-                                name = theunit.Descendants("name").FirstOrDefault().Value;
-                                imgPath = theunit.Descendants("imagePath").FirstOrDefault().Value;
-                                dir = Convert.ToInt32(theunit.Descendants("direction").FirstOrDefault().Value);
-                                pass = Convert.ToBoolean(theunit.Descendants("passable").FirstOrDefault().Value);
-                                latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Unit(xPosition, yPosition, imgPath, intToDirection(dir), name, pass));
+                            if (obj.ID.ToUpper().Equals(child.Attribute("id").Value.ToString().ToUpper()))
+                            {
+                                latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.BaseObject(xPosition, yPosition, obj.ImagePath, obj.Direction, obj.Name, obj.IsPassable, obj.IsInteractable));
                                 break;
-
-                            case "BaseObject":
-                                name = theunit.Descendants("name").FirstOrDefault().Value;
-                                imgPath = theunit.Descendants("imagePath").FirstOrDefault().Value;
-                                dir = Convert.ToInt32(theunit.Descendants("direction").FirstOrDefault().Value);
-                                pass = Convert.ToBoolean(theunit.Descendants("passable").FirstOrDefault().Value);
-                                inter = Convert.ToBoolean(theunit.Descendants("interactable").FirstOrDefault().Value);
-                                latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.BaseObject(xPosition, yPosition, imgPath, intToDirection(dir), name, pass, inter));
-                                break;
-
-                            case "Mobile":
-                                name = theunit.Descendants("name").FirstOrDefault().Value;
-                                imgPath = theunit.Descendants("imagePath").FirstOrDefault().Value;
-                                dir = Convert.ToInt32(theunit.Descendants("direction").FirstOrDefault().Value);
-                                hitsMax = Convert.ToInt32(theunit.Descendants("hitsMax").FirstOrDefault().Value);
-                                attack = Convert.ToInt32(theunit.Descendants("attack").FirstOrDefault().Value);
-                                defense = Convert.ToInt32(theunit.Descendants("defense").FirstOrDefault().Value);
-                                latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Mobile(xPosition, yPosition, imgPath, intToDirection(dir), name, hitsMax, attack, defense));
-                                break;
-
-                            case "PlayerChar":
-                                name = theunit.Descendants("name").FirstOrDefault().Value;
-                                imgPath = theunit.Descendants("imagePath").FirstOrDefault().Value;
-                                dir = Convert.ToInt32(theunit.Descendants("direction").FirstOrDefault().Value);
-                                hitsMax = Convert.ToInt32(theunit.Descendants("hitsMax").FirstOrDefault().Value);
-                                attack = Convert.ToInt32(theunit.Descendants("attack").FirstOrDefault().Value);
-                                defense = Convert.ToInt32(theunit.Descendants("defense").FirstOrDefault().Value);
-                                latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.PlayerChar(xPosition, yPosition, imgPath, intToDirection(dir), name, hitsMax, attack, defense));
-                                break;
-
-                            case "Container":
-                                name = theunit.Descendants("name").FirstOrDefault().Value;
-                                imgPath = theunit.Descendants("imagePath").FirstOrDefault().Value;
-                                dir = Convert.ToInt32(theunit.Descendants("direction").FirstOrDefault().Value);
-                                latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Container(xPosition, yPosition, imgPath, intToDirection(dir), name));
-                                break;
-
-                            case "Item":
-                                name = theunit.Descendants("name").FirstOrDefault().Value;
-                                imgPath = theunit.Descendants("imagePath").FirstOrDefault().Value;
-                                dir = Convert.ToInt32(theunit.Descendants("direction").FirstOrDefault().Value);
-                                latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Item(xPosition, yPosition, imgPath, intToDirection(dir), name));
-                                break;
-
-                            case "Corpse":
-                                name = theunit.Descendants("name").FirstOrDefault().Value;
-                                imgPath = theunit.Descendants("imagePath").FirstOrDefault().Value;
-                                dir = Convert.ToInt32(theunit.Descendants("direction").FirstOrDefault().Value);
-                                latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Corpse(xPosition, yPosition, imgPath, intToDirection(dir), name));
-                                break;
-
-                            default:
-                                break;
+                            }
                         }
-
                     }
                 }
             }
-
         }
-
-
     }
 }

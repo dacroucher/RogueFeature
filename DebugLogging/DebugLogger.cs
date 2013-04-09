@@ -15,7 +15,7 @@ namespace RogueFeature.DebugLogging
         private static uint errorCount;
         private static uint messageCount;
 
-        public static DebugLogger()
+        static DebugLogger()
         {
             DebugLogger.errorCount = 0;
             DebugLogger.messageCount = 0;

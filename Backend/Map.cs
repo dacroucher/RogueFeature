@@ -10,6 +10,8 @@ namespace RogueFeature.Backend
     {
         private uint _rows;
         private uint _columns;
+        private uint _id;
+        private string _name;
         public uint rows
         {
             get
@@ -25,12 +27,31 @@ namespace RogueFeature.Backend
             }
         }
 
-        private Point[][] _points;
+        public uint ID
+        {
+            get
+            {
+                return _id;
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+        }
 
-        public Map(uint rows, uint columns)
+        public Point[,] Points { get { return _points; } }
+        private Point[,] _points;
+
+        public Map(uint rows, uint columns, uint id, string name)
         {
             _rows = rows;
-            _columns = columns;            
+            _columns = columns;
+            _id = id;
+            _name = name;
+            _points = new Point[rows,columns];
         }
 
         //Initialise a point in the map
@@ -38,7 +59,7 @@ namespace RogueFeature.Backend
         {                                        
                 try
                 {
-                    _points[x][y] = new Point(this, imagePath, face, pass);
+                    _points[x, y] = new Point(this, imagePath, face, pass);
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -51,10 +72,10 @@ namespace RogueFeature.Backend
         {
             try
             {
-                if (_points[x][y] == null)
+                if (_points[x,y] == null)
                     throw new NullReferenceException("Point " + x + ";" + y + " is not initialised");
-                _points[x][y].AddUnit(u);
-                u.SetPoint(_points[x][y]);
+                _points[x,y].AddUnit(u);
+                u.SetPoint(_points[x,y]);
             }
             catch (IndexOutOfRangeException)
             {
@@ -67,7 +88,7 @@ namespace RogueFeature.Backend
         {
             if (BoundCheck(x, y))
                 return false;
-            Point p = _points[x][y];
+            Point p = _points[x,y];
             if (p.passable)
             {
                 Unit[] units = p.UnitList();
@@ -89,7 +110,7 @@ namespace RogueFeature.Backend
         {            
             try
             {
-                return _points[x][y].UnitList();
+                return _points[x,y].UnitList();
             }
             catch (IndexOutOfRangeException)
             {

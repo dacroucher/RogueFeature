@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RogueFeature.Backend
 {
-    class ComputedEventArgs : EventArgs
+    public class ComputedEventArgs : EventArgs
     {
 
         DeltaUnitPair [] deltaMap;

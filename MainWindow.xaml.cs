@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace RogueFeature
 {
@@ -19,11 +20,52 @@ namespace RogueFeature
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameHandle handle;
+        private GameHandle handle;
+        private DispatcherTimer tmrTime;
         public MainWindow()
         {
             InitializeComponent();
             handle = new GameHandle();
+            spMain.Children.Add(handle.ucMainGrid);
+            Dictionary<uint, string> lstMaps = handle.GetMaps();
+            foreach (KeyValuePair<uint, string> map in lstMaps)
+            {
+                Button b = new Button();
+                b.Tag = map.Key;
+                b.Content = map.Value;
+                b.Margin = new Thickness(5, 5, 0, 0);
+                b.Click += new RoutedEventHandler(b_Click);
+                spLevel.Children.Add(b);
+            }
+            this.CreateTimer();
         }
+
+        private void CreateTimer()
+        {
+            //  DispatcherTimer setup
+            tmrTime = new DispatcherTimer();
+            tmrTime.Tick += new EventHandler(dispatcherTimer_Tick);
+            tmrTime.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            tmrTime.Start();
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            handle.Process(sender, e);
+            // Forcing the CommandManager to raise the RequerySuggested event
+            CommandManager.InvalidateRequerySuggested();
+        }
+
+        private void b_Click(object sender, RoutedEventArgs e)
+        {
+            handle.GoToGrid(uint.Parse((sender as Button).Tag.ToString()));
+        }
+
+        private void Grid_KeyDown(object sender, KeyEventArgs e)
+        {
+            handle.KeyDown(sender, e);
+        }
+
+
     }
 }

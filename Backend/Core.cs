@@ -14,6 +14,7 @@ namespace RogueFeature.Backend
         public event ComputeComplete Computed;
 
         private Map _map;
+        public Map Map { get { return _map; } }
         private PlayerChar _pc;        
         public static DeltaMap delta = new DeltaMap();
         
@@ -21,7 +22,8 @@ namespace RogueFeature.Backend
         //Initialise a core with a loaded map
         public Core(Map map)
         {
-            _map = map;            
+            _map = map;    
+          //  _pc = new PlayerChar( fix ddd
         }
 
         //Set the current play map

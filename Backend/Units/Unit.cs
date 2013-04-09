@@ -9,7 +9,6 @@ namespace RogueFeature.Backend.Units
     
     public class Unit
     {
-        
         public int x;
         public int y;
         public String imgPath;
