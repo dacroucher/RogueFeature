@@ -9,16 +9,14 @@
       <yposition>0</yposition>
       <imagePath>Images\wall1.png</imagePath>
       <direction>0</direction>
-      <passable>False</passable>
-      <object id="unit" />
+      <passable>False</passable>      
     </point>
     <point>
       <xposition>0</xposition>
       <yposition>1</yposition>
       <imagePath>Images\wall1.png</imagePath>
       <direction>0</direction>
-      <passable>False</passable>
-      <object id="unit" />
+      <passable>False</passable>      
     </point>
     <point>
       <xposition>0</xposition>
@@ -27,6 +25,28 @@
       <direction>0</direction>
       <passable>True</passable>
       <object id="playerchar" />
+    </point>
+    <point>
+      <xposition>0</xposition>
+      <yposition>3</yposition>
+      <imagePath>Images\floor1.png</imagePath>
+      <direction>0</direction>
+      <passable>True</passable>      
+    </point>
+    <point>
+      <xposition>0</xposition>
+      <yposition>4</yposition>
+      <imagePath>Images\floor1.png</imagePath>
+      <direction>0</direction>
+      <passable>True</passable>     
+    </point>
+    <point>
+      <xposition>0</xposition>
+      <yposition>5</yposition>
+      <imagePath>Images\floor1.png</imagePath>
+      <direction>0</direction>
+      <passable>True</passable>      
+      <object id="mobile" />
     </point>
   </map>
   
@@ -42,9 +62,10 @@
       <passable>False</passable>
       <interactable>False</interactable>
     </object>
+    
 
     <object id="mobile">
-      <imagePath>images\0001.bmp</imagePath>
+      <imagePath>images\monster1.png</imagePath>
       <passable>False</passable>
       <interactable>False</interactable>
       <hitsMax>10</hitsMax>
@@ -54,7 +75,7 @@
 
     <object id="playerchar">
       <imagePath>images\player.png</imagePath>
-      <hitsMax>10</hitsMax>
+      <hitsMax>20</hitsMax>
       <attack>3</attack>
       <defense>2</defense>
     </object>

@@ -14,17 +14,17 @@ namespace RogueFeature.Backend
         public event ComputeComplete Computed;
 
         private Map _map;
-        public Map Map { get { return _map; } }
-        private PlayerChar _pc;        
+        public Map Map { get { return _map; } }        
         public static DeltaMap delta = new DeltaMap();
-        
+
+        public static PlayerChar pc; //registered when new PlayerChar() is called
 
         //Initialise a core with a loaded map
         public Core(Map map)
         {
-            _map = map;    
-          //  _pc = new PlayerChar( fix ddd
+            _map = map;                
         }
+        
 
         //Set the current play map
         public void SetMap(Map map)
@@ -47,9 +47,9 @@ namespace RogueFeature.Backend
         //Computes the AI
         private void ComputeAI()
         {
-            foreach (Mobile m in _map.GetMobilesInRange(_pc.x, _pc.y, 7))
+            foreach (Mobile m in _map.GetMobilesInRange(pc.x, pc.y, 7))
             {
-                m.Act(_map,_pc);
+                m.Act(_map,pc);
             }
         }
 
@@ -57,8 +57,8 @@ namespace RogueFeature.Backend
         private void Action(Direction d)
         {
             //Check for move
-            int xCheck = _pc.x;
-            int yCheck = _pc.y;
+            int xCheck = pc.x;
+            int yCheck = pc.y;
             switch(d)
             {
                 case Direction.UP:
@@ -84,13 +84,13 @@ namespace RogueFeature.Backend
             if (_map.Passable(xCheck, yCheck)) //Check if target area is passable
             {                
                 //move if passable                
-                _pc.Move(xCheck, yCheck);
+                pc.Move(xCheck, yCheck);
                 
                 //interact with items on the square
                 foreach (Unit u in units)
                 {
                     if (u is BaseObject)
-                        ((BaseObject)u).Interact(_pc);
+                        ((BaseObject)u).Interact(pc);
                 }
             }
             else //Otherwise interact with whatever is in the unpassable block
@@ -99,11 +99,11 @@ namespace RogueFeature.Backend
                 {
                     if(u is Mobile)
                     {
-                        ((Mobile)u).TakeHit(_pc);
+                        ((Mobile)u).TakeHit(pc);
                     }
                     else if (u is BaseObject)
                     {                        
-                        ((BaseObject)u).Interact(_pc);
+                        ((BaseObject)u).Interact(pc);
                     }
                 }
             }
