@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using RogueFeature.Backend.Units;
 using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 
 namespace RogueFeature.Backend
 {
@@ -26,8 +27,9 @@ namespace RogueFeature.Backend
                     path = "\\" + path;
                 }
             }
-            path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + path;
-            
+            path = "file:///" + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + path;
+
+            path = path.Replace("\\", "/");
             if (Images.ContainsKey(path))
             {
                 BitmapImage bitmapImage = null;
@@ -40,10 +42,10 @@ namespace RogueFeature.Backend
 
         private static BitmapImage AddImage(string path)
         {
-            BitmapImage bitmapImage = new BitmapImage();
+            BitmapImage bitmapImage = null;
             try
             {
-                bitmapImage.UriSource = new Uri(path);
+                bitmapImage = new BitmapImage(new Uri(path));
                 Images.Add(path, bitmapImage);
                 return bitmapImage;
             }

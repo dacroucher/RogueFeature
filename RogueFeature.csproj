@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -117,7 +118,17 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Loader\map.xml" />
+    <Resource Include="Images\container1.png" />
+    <Resource Include="Images\cornerIn1.png" />
+    <Resource Include="Images\cornerOut1.png" />
+    <Resource Include="Images\floor1.png" />
+    <Resource Include="Images\healthPack1.png" />
+    <Resource Include="Images\monster1.png" />
+    <Resource Include="Images\player.png" />
+    <Resource Include="Images\wall1.png" />
+    <Content Include="Loader\map.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
