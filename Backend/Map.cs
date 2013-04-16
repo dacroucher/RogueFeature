@@ -51,7 +51,7 @@ namespace RogueFeature.Backend
             _columns = columns;
             _id = id;
             _name = name;
-            _points = new Point[rows,columns];
+            _points = new Point[columns, rows];
         }
 
         //Initialise a point in the map
@@ -173,11 +173,11 @@ namespace RogueFeature.Backend
         //Check if a point x;y is within the column/row bounds of map
         public bool BoundCheck(int x, int y)
         {
-            if (x > _columns || x < 0)
+            if (x > _columns-1 || x < 0)
             {
                 return false;
             }
-            if (y > _rows || y < 0)
+            if (y > _rows-1 || y < 0)
             {
                 return false;
             }

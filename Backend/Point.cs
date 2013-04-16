@@ -71,7 +71,8 @@ namespace RogueFeature.Backend
         private List<Unit> GenerateUnitList()
         {
             List<Unit> units = new List<Unit>(_objects);
-            units.Add(_mob);
+            if(_mob != null)
+                units.Add(_mob);
             return units;
         }
 

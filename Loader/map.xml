@@ -1,42 +1,64 @@
 <?xml version="1.0"?>
 <RogueFeature>
   <map>
-    <rows>10</rows>
-    <columns>10</columns>
+    <rows>1</rows>
+    <columns>7</columns>
     <name>level 1</name>
     <point>
       <xposition>0</xposition>
-      <yposition>0</yposition>
+      <yposition>0</yposition>      
       <imagePath>Images\wall1.png</imagePath>
       <direction>0</direction>
-      <passable>False</passable>
-      <object id="unit" />
+      <passable>False</passable>      
     </point>
     <point>
-      <xposition>0</xposition>
-      <yposition>1</yposition>
+      <xposition>1</xposition>
+      <yposition>0</yposition>      
       <imagePath>Images\wall1.png</imagePath>
       <direction>0</direction>
-      <passable>False</passable>
-      <object id="unit" />
+      <passable>False</passable>      
     </point>
     <point>
-      <xposition>9</xposition>
-      <yposition>9</yposition>
-      <imagePath>Images\wall1.png</imagePath>
-      <direction>0</direction>
-      <passable>False</passable>
-      <object id="unit" />
-    </point>
-    <point>
-      <xposition>0</xposition>
-      <yposition>2</yposition>
+      <xposition>2</xposition>
+      <yposition>0</yposition>      
       <imagePath>Images\floor1.png</imagePath>
       <direction>0</direction>
       <passable>True</passable>
       <object id="playerchar" />
     </point>
+    <point>
+      <xposition>3</xposition>
+      <yposition>0</yposition>
+      <imagePath>Images\floor1.png</imagePath>
+      <direction>0</direction>
+      <passable>True</passable>
+    </point>
+    <point>
+      <xposition>4</xposition>
+      <yposition>0</yposition>
+      <imagePath>Images\floor1.png</imagePath>
+      <direction>0</direction>
+      <passable>True</passable>
+      <object id="actor" />
+    </point>
+    <point>
+      <xposition>5</xposition>
+      <yposition>0</yposition>
+      <imagePath>Images\floor1.png</imagePath>
+      <direction>0</direction>
+      <passable>True</passable>      
+    </point>
+    <point>
+      <xposition>6</xposition>
+      <yposition>0</yposition>
+      <imagePath>Images\floor1.png</imagePath>
+      <direction>0</direction>
+      <passable>True</passable>
+      <object id="healthpack" />
+    </point>
   </map>
+  
+  
   <map>
     <rows>10</rows>
     <columns>10</columns>
@@ -62,26 +84,19 @@
       <yposition>2</yposition>
       <imagePath>Images\floor1.png</imagePath>
       <direction>0</direction>
-      <passable>True</passable>
-      <object id="playerchar" />
+      <passable>True</passable>      
     </point>
   </map>
   
-  <objects>
-    <object id="unit">
-      <imagePath>images\0001.bmp</imagePath>
-      <passable>False</passable>
-      <interactable>False</interactable>
-    </object>
-
+  <objects>    
     <object id="baseobject">
       <imagePath>images\0001.bmp</imagePath>
       <passable>False</passable>
       <interactable>False</interactable>
     </object>
 
-    <object id="mobile">
-      <imagePath>images\0001.bmp</imagePath>
+    <object id="actor">
+      <imagePath>images\monster1.png</imagePath>
       <passable>False</passable>
       <interactable>False</interactable>
       <hitsMax>10</hitsMax>
@@ -91,13 +106,13 @@
 
     <object id="playerchar">
       <imagePath>images\player.png</imagePath>
-      <maxHits>10</maxHits>
+      <maxHits>30</maxHits>
       <attack>3</attack>
       <defense>2</defense>
     </object>
 
     <object id="container">
-      <imagePath>images\0001.bmp</imagePath>
+      <imagePath>images\container1.png</imagePath>
     </object>
 
     <object id="item">
@@ -107,5 +122,11 @@
     <object id="corpse">
       <imagePath>images\0001.bmp</imagePath>
     </object>
+
+    <object id="healthpack">
+      <imagePath>images\healthPack1.png</imagePath>
+      <heal>5</heal>
+    </object>
+    
   </objects>
 </RogueFeature>

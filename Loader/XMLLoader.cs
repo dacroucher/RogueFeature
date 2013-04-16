@@ -22,6 +22,7 @@ namespace Loader
             public string ImagePath { set; get; }
             public Direction Direction { set; get; }
             public bool IsInteractable { set; get; }
+            public int Heal { set; get; }
         }
 
         // Path to XML data file.
@@ -154,6 +155,11 @@ namespace Loader
                 }
                 else unitObj.Defense = 0;
 
+                if (obj.Descendants("heal").FirstOrDefault() != null)
+                {
+                    unitObj.Defense = int.Parse(obj.Descendants("heal").FirstOrDefault().Value.ToString());
+                }
+                else unitObj.Defense = 0;
 
                 lstUnitObjects.Add(unitObj);
             }
@@ -174,8 +180,7 @@ namespace Loader
                     int yPosition = Convert.ToInt32(point.Descendants("yposition").FirstOrDefault().Value);
                     int direction = Convert.ToInt32(point.Descendants("direction").FirstOrDefault().Value);
                     string imagePath = point.Descendants("imagePath").FirstOrDefault().Value;
-                    bool passable = Convert.ToBoolean(point.Descendants("passable").FirstOrDefault().Value);
-
+                    bool passable = Convert.ToBoolean(point.Descendants("passable").FirstOrDefault().Value);                    
                     // Initialize point.
                     latestMap.InitPoint(xPosition, yPosition, imagePath, intToDirection(direction), passable);
 
@@ -187,15 +192,12 @@ namespace Loader
                             {
                                 //bbb all of below needs constants..
                                 switch (obj.ID.ToUpper())
-                                {
-                                    case "UNIT":
-                                        latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Unit(xPosition, yPosition, obj.ImagePath, obj.Direction, obj.Name, obj.IsPassable));
-                                        break;
+                                {                                       
                                     case "BASEOBJECT":
                                         latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.BaseObject(xPosition, yPosition, obj.ImagePath, obj.Direction, obj.Name, obj.IsPassable, obj.IsInteractable));
                                         break;
-                                    case "MOBILE":
-                                        latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Mobile(xPosition, yPosition, obj.ImagePath, obj.Direction, obj.Name, obj.MaxHits, obj.Attack, obj.Defense));
+                                    case "ACTOR":
+                                        latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Actor(xPosition, yPosition, obj.ImagePath, obj.Direction, obj.Name, obj.MaxHits, obj.Attack, obj.Defense));
                                         break;
                                     case "PLAYERCHAR":
                                         latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.PlayerChar(xPosition, yPosition, obj.ImagePath, obj.Direction, obj.Name, obj.MaxHits, obj.Attack, obj.Defense));
@@ -208,6 +210,9 @@ namespace Loader
                                         break;
                                     case "CORPSE":
                                         latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.Corpse(xPosition, yPosition, obj.ImagePath, obj.Direction, obj.Name));
+                                        break;
+                                    case "HEALTHPACK":
+                                        latestMap.AddUnitToPoint(xPosition, yPosition, new RogueFeature.Backend.Units.HealthPack(xPosition, yPosition, obj.ImagePath, obj.Direction, obj.Name, obj.Heal));
                                         break;
 
                                 }
