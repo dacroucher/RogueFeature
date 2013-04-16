@@ -21,7 +21,7 @@ namespace RogueFeature.Backend.Units
             locked = true;
         }
 
-        public override void Interact(PlayerChar pc)
+        public override void Interact(Mobile m)
         {
             if (locked)
                 return;

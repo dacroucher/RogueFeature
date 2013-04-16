@@ -90,7 +90,7 @@ namespace RogueFeature.Backend
                 return false;
             Point p = _points[x,y];
             if (p.passable)
-            {
+            {                
                 Unit[] units = p.UnitList();
                 foreach (Unit u in units)
                 {
@@ -122,56 +122,51 @@ namespace RogueFeature.Backend
         //Perform a sequence of box searches surrounding origin x;y up to a range to find all mobiles
         public Mobile[] GetMobilesInRange(int originX, int originY, int range)
         {
-            List<Unit> units = new List<Unit>();
             List<Mobile> mobs = new List<Mobile>();
-
             for (int i = 1; i < range; i++)
             {
-                TileBoxSearch(originX - i, originY - i, (i*2) + 1);
+                mobs.AddRange(TileBoxSearch(originX - i, originY - i, (i*2) + 1));
             }
-
-            foreach (Unit u in units)
-            {
-                if (u is Mobile)
-                {
-                    mobs.Add((Mobile)u);
-                }
-            }
+            
             return mobs.ToArray();
         }
-        private List<Unit> TileBoxSearch(int xTopLeft, int yTopLeft, int sideLength)
+        private List<Mobile> TileBoxSearch(int xTopLeft, int yTopLeft, int sideLength)
         {
-            List<Unit> units = new List<Unit>();
+            List<Mobile> mobs = new List<Mobile>();
             
             //top bar R2L
             for (int i = 0; i < sideLength; i++ )
             {
                 if(BoundCheck(xTopLeft + i, yTopLeft))
-                    units.AddRange(GetUnits(xTopLeft + i, yTopLeft));
+                    if(Occupied(xTopLeft + i, yTopLeft))
+                    mobs.Add(GetMobile(xTopLeft + i, yTopLeft));
             }
 
             //right bar T2B
             for (int j = 1; j < sideLength; j++)
             {
                 if(BoundCheck(xTopLeft + sideLength - 1, yTopLeft + j))
-                    units.AddRange(GetUnits(xTopLeft + sideLength - 1, yTopLeft + j));
+                    if(Occupied(xTopLeft + sideLength - 1, yTopLeft + j))
+                    mobs.Add(GetMobile(xTopLeft + sideLength - 1, yTopLeft + j));
             }
             
             //left bar T2B
             for (int j = 1; j < sideLength; j++)
             {
                 if(BoundCheck(xTopLeft, yTopLeft + j))
-                    units.AddRange(GetUnits(xTopLeft, yTopLeft + j));
+                    if(Occupied(xTopLeft, yTopLeft + j))
+                    mobs.Add(GetMobile(xTopLeft, yTopLeft + j));
             }
 
             //bottom bar R2L
             for (int i = 1; i < sideLength - 1; i++)
             {
-                if (BoundCheck(xTopLeft + i, yTopLeft + sideLength - 1)) 
-                    units.AddRange(GetUnits(xTopLeft + i, yTopLeft + sideLength - 1));
+                if (BoundCheck(xTopLeft + i, yTopLeft + sideLength - 1))
+                    if(Occupied(xTopLeft + i, yTopLeft + sideLength - 1))
+                    mobs.Add(GetMobile(xTopLeft + i, yTopLeft + sideLength - 1));
             }
 
-            return units;
+            return mobs;
         }
         #endregion
 
@@ -187,6 +182,21 @@ namespace RogueFeature.Backend
                 return false;
             }
             return true;
+        }
+
+        public bool Occupied(int x, int y)
+        {
+            return _points[x, y].Occupied;
+        }
+
+        public BaseObject[] GetObjects(int x, int y)
+        {
+            return _points[x, y].GetObjects();
+        }
+
+        public Mobile GetMobile(int x, int y)
+        {
+            return _points[x, y].GetMobile();
         }
 
 

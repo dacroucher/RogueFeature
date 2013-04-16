@@ -14,11 +14,11 @@ namespace RogueFeature.Backend.Units
             _healAmount = healAmount;
         }
 
-        public override void Interact(PlayerChar pc)
+        public override void Interact(Mobile m)
         {
             if (!_consumed)
             {
-                pc.hits = pc.hits + _healAmount;
+                m.hits = m.hits + _healAmount;
                 _consumed = true;
             }
             Core.delta.DeltaRemove(this);

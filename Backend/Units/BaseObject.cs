@@ -14,7 +14,7 @@ namespace RogueFeature.Backend.Units
             this.interactable = interactable;
         }
 
-        public virtual void Interact(PlayerChar pc)
+        public virtual void Interact(Mobile m)
         {
             if (!interactable)
                 return;
