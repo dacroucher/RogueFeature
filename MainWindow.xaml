@@ -7,7 +7,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Name="spLevel" Grid.Row="0"/>
+        <DockPanel Name="spLevel" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <StackPanel Name="spMain" Grid.Row="1"/>
     </Grid>
 </Window>

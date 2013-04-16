@@ -42,29 +42,23 @@ namespace RogueFeature.Fontend
             this.CreateGrid(core.Map.rows, core.Map.columns);
             int xSize = core.Map.Points.GetUpperBound(0);
 	        int ySize = core.Map.Points.GetUpperBound(1);
-            for(int x = 0; x < xSize; ++x)
+            for(int x = 0; x <= xSize; ++x)
             {
-                for(int y = 0; y < ySize; ++y)
+                for(int y = 0; y <= ySize; ++y)
                 {
                     if (core.Map.Points[x, y] != null)
                     {
                         Image m = new Image();
                         m.Tag = core.Map.Points[x, y];
                         m.Source = ImageLib.GrabImage(core.Map.Points[x, y].ImgID);
-       
+
                         m.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                         m.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
                         gridMain.Children.Add(m);
                         Grid.SetColumn(m, y);
                         Grid.SetRow(m, x);
 
-                        StackPanel s = new StackPanel();
-                        s.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-                        s.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-                        s.Background = Brushes.Red;
-                        Grid.SetColumn(s, y);
-                        Grid.SetRow(s, x);
-                      //  gridMain.Children.Add(s);
+                        //  gridMain.Children.Add(s);
                         //Canvas.SetZIndex(m, 1);
 
                         foreach (Unit u in core.Map.Points[x, y].Units)
@@ -77,6 +71,17 @@ namespace RogueFeature.Fontend
                             gridMain.Children.Add(m2);
                             Canvas.SetZIndex(m2, 1);
                         }
+                    }
+                    else
+                    {
+                        //bbb temp jst for testing..
+                        StackPanel s = new StackPanel();
+                        s.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                        s.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                        s.Background = Brushes.Red;
+                        Grid.SetColumn(s, y);
+                        Grid.SetRow(s, x);
+                        gridMain.Children.Add(s);
                     }
                 }
             }

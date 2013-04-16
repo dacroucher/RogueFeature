@@ -32,6 +32,7 @@ namespace RogueFeature
             {
                 Button b = new Button();
                 b.Tag = map.Key;
+                b.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
                 b.Content = map.Value;
                 b.Margin = new Thickness(5, 5, 0, 0);
                 b.Click += new RoutedEventHandler(b_Click);

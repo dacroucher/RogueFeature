@@ -17,7 +17,7 @@ namespace RogueFeature.Backend.Units
         public String name;
         protected Point _point;
 
-        protected Unit(int x, int y, String imagePath, Direction face, String name, bool passable)
+        public Unit(int x, int y, String imagePath, Direction face, String name, bool passable)
         {
             this.x = x;
             this.y = y;
