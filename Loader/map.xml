@@ -99,7 +99,7 @@
       <imagePath>images\monster1.png</imagePath>
       <passable>False</passable>
       <interactable>False</interactable>
-      <hitsMax>10</hitsMax>
+      <maxHits>10</maxHits>
       <attack>3</attack>
       <defense>2</defense>
     </object>

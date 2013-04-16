@@ -31,7 +31,7 @@ namespace RogueFeature.Backend.Units
             int diffX = tarX - x;
             int diffY = tarY - y;
 
-            if (Math.Abs(diffX) == 1 && Math.Abs(diffY) == 1)
+            if ((Math.Abs(diffX) == 1 && Math.Abs(diffY) == 0) || (Math.Abs(diffX) == 0 && Math.Abs(diffY) == 1))
             {
                 return true; //found target
             }

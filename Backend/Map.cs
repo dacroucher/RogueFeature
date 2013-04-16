@@ -86,7 +86,7 @@ namespace RogueFeature.Backend
         //Check if a point is passable
         public bool Passable(int x, int y)
         {
-            if (BoundCheck(x, y))
+            if (!BoundCheck(x, y))
                 return false;
             Point p = _points[x,y];
             if (p.passable)

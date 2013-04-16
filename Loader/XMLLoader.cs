@@ -157,7 +157,7 @@ namespace Loader
 
                 if (obj.Descendants("heal").FirstOrDefault() != null)
                 {
-                    unitObj.Defense = int.Parse(obj.Descendants("heal").FirstOrDefault().Value.ToString());
+                    unitObj.Heal = int.Parse(obj.Descendants("heal").FirstOrDefault().Value.ToString());
                 }
                 else unitObj.Defense = 0;
 
